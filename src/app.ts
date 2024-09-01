@@ -14,7 +14,7 @@ const app:Application = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer,{
     cors: {
-        origin: true,
+        origin: 'https://hometrends.site',
         methods: ["GET", "POST"],
         credentials: true,
       },
