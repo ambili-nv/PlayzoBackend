@@ -14,8 +14,7 @@ const app:Application = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer,{
     cors: {
-        // origin: 'http://localhost:5173',
-        origin: 'https://playzo.vercel.app',
+        origin: "https://playzo.vercel.app",
         methods: ["GET", "POST"],
         credentials: true,
       },

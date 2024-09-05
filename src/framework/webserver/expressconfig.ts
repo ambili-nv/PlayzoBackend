@@ -10,7 +10,6 @@ const expressConfig = (app:Application)=>{
     app.use(morgan("dev"));
     const corsConfig = {
         origin : "https://playzo.vercel.app",
-        // origin : true,
         methods:['GET','POST','PUT','DELETE','PATCH'],
         credentials: true,
 
