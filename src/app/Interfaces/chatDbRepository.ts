@@ -13,8 +13,10 @@ export const chatDbRepository = (
     }
 
     const getAllChats =async (senderId:string)=>{
+        console.log("chat 3");
+        
        const chats =  await repository.getAllChats(senderId)
-    //    console.log(chats,"dbRepo chats");
+       console.log(chats,"dbRepo chats");
        
        return chats
     }

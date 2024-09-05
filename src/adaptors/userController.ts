@@ -18,7 +18,7 @@ import {
      sendVerificationCode,
      verifyTokenAndPassword
     } from '../app/use-cases/user/auth/userAuth';
-import { getVenue,findTimeSlotsByVenueIdAndDate  } from "../app/use-cases/user/auth/userRead";
+import { getVenue,findTimeSlotsByVenueIdAndDate,getVenuesByDateService  } from "../app/use-cases/user/auth/userRead";
 import { getUser,updateUser } from "../app/use-cases/user/auth/profile";
 import { findVenueDetails } from "../app/use-cases/owner/venueUpload";
 import { ownerRepositoryMongodbType } from "../framework/database/mongodb/repositories/ownerRepositoryMongodb";
@@ -186,6 +186,24 @@ const userController = (
     }
 
 
+    const getVenuesDate = async(req:Request,res:Response,next:NextFunction)=>{
+        try {
+            const { date } = req.query;
+            console.log(date,"date get");
+            
+            if (!date) {
+                return res.status(400).json({ success: false, message: 'Date is required' });
+            }
+            const venues = await getVenuesByDateService(date as string, dbRepositoryVenue);
+            console.log(venues,"venue dates");
+            
+            return res.status(200).json({ success: true, venues });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+
     const getUserProfile = async(req:Request,res:Response,next:NextFunction)=>{
         try {
             // console.log("userProfile req got");
@@ -297,7 +315,8 @@ const addRating = async (req: Request, res: Response, next: NextFunction) =>{
         getSingleVenue,
         viewSlotsByDate,
         getOwnerDetails,
-        addRating
+        addRating,
+        getVenuesDate
     }
 }
 

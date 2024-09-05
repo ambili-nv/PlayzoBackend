@@ -20,7 +20,7 @@ const chatController = (
             const formattedReceiverId = String(recieverId);
             // console.log(senderId ,recieverId,"id in chat");
             const chats = await newChat(senderId, formattedReceiverId, chatRepository);
-            // console.log(chats,"cahts c////////////");
+            console.log(chats,"cahts c////////////");
             
             res.status(HttpStatus.OK).json({ success: true, chats });
         } catch (error) {
@@ -32,9 +32,9 @@ const chatController = (
 
     const getChats = async(req:Request,res:Response,next:NextFunction)=>{
         const {senderId} = req.params
-        // console.log(senderId,"params senderis");
+        console.log(senderId,"params senderis");
         const chats = await getChat(senderId,chatRepository)
-        // console.log(chats,"chats///////////?????????????");
+        console.log(chats,"chats///////////?????????????");
         res.status(HttpStatus.OK).json({ success: true, chats });
     }
 

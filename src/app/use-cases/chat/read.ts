@@ -4,8 +4,10 @@ export const getChat = async(
     senderId:string,
     chatRepository: ReturnType<ChatDbRepositoryInterace>
 )=>{
+    console.log("chat 2");
+    
     const chats = await chatRepository.getAllChats(senderId)
-    // console.log(chats,"read chats");
+    console.log(chats,"read chats");
     return chats
 }
 

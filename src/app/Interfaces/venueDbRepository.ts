@@ -27,6 +27,15 @@ export const venueDbRepository = (
         }
     }
 
+    const getVenuesByDate = async (date:any)=>{
+        try {
+            const getVenuesByDate = await repository.getVenuesByDate(date)
+            return getVenuesByDate
+        } catch (error) {
+            
+        }
+    }
+
 const addTimeSlots = async (timeSlots: TimeSlotEntity[]) => {
     const newTimeSlot = await repository.addTimeSlots(timeSlots);
     return newTimeSlot;
@@ -83,7 +92,8 @@ const getRatings = async (filter: Record<string, any>) =>
         deleteTimeSlotByVenueIdAndDate,
         addRating,
         getRatings,
-        getVenue
+        getVenue,
+        getVenuesByDate
     }
 }
 

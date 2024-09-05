@@ -110,6 +110,82 @@ export const venueRepositoryMongodb = ()=>{
             }
         };
 
+
+        // const getVenuesByDate = async (date: string) => {
+        //     try {
+
+        //         const startOfDay = new Date(date);
+        //         startOfDay.setUTCHours(0, 0, 0, 0);
+        //         const endOfDay = new Date(date);
+        //         endOfDay.setUTCHours(23, 59, 59, 999);
+        //         const timeSlots = await slots.find({
+        //             date: { $gte: startOfDay, $lte: endOfDay },
+        //             status: 'available'
+        //         });        
+        //         console.log(timeSlots, "Venues from DB");
+        
+        //         return timeSlots;
+        //     } catch (error) {
+        //         console.error('Error fetching venues with ratings and slots:', error);
+        //         throw new Error('Error fetching venues with ratings and slots');
+        //     }
+        // };
+        
+
+        // const getVenuesByDate = async (date: string) => {
+        //     try {
+        //         // Define start and end of the day for the date provided
+        //         const startOfDay = new Date(date);
+        //         startOfDay.setUTCHours(0, 0, 0, 0);
+        //         const endOfDay = new Date(date);
+        //         endOfDay.setUTCHours(23, 59, 59, 999);
+        
+        //         // Fetch slots for the given date and populate venue details
+        //         const timeSlots = await slots.find({
+        //             date: { $gte: startOfDay, $lte: endOfDay },
+        //             status: 'available'
+        //         })
+        //         console.log(timeSlots, "Detailed Slots");
+        
+        //         return timeSlots;
+        //     } catch (error) {
+        //         console.error('Error fetching venues with ratings and slots:', error);
+        //         throw new Error('Error fetching venues with ratings and slots');
+        //     }
+        // };
+        
+
+        const getVenuesByDate = async (date: string) => {
+            try {
+                // Define start and end of the day for the date provided
+                const startOfDay = new Date(date);
+                startOfDay.setUTCHours(0, 0, 0, 0);
+                const endOfDay = new Date(date);
+                endOfDay.setUTCHours(23, 59, 59, 999);
+        
+                const timeSlots = await slots.find({
+                    date: { $gte: startOfDay, $lte: endOfDay },
+                    status: 'available'
+                })
+                .populate({
+                    path: 'venueId',  // This refers to the field name in the slots schema
+                    match: { isApproved: 'true' }, // Match only approved venues
+                    select: 'name sportsitem place primaryImage' // Only include required fields
+                });
+                
+        
+                console.log(timeSlots, "Detailed Slots with Venue Info");
+        
+                return timeSlots;
+            } catch (error) {
+                console.error('Error fetching venues with ratings and slots:', error);
+                throw new Error('Error fetching venues with ratings and slots');
+            }
+        };
+        
+        
+        
+
         const getTimeSlotsByVenueId = async (venueId: string) => {
             const timeSlots = await slots.find({ venueId });
             // console.log(timeSlots,"view slots from db");
@@ -164,7 +240,7 @@ export const venueRepositoryMongodb = ()=>{
         
         const getTimeSlotsByVenueIdAndDate = async (venueId: string, date: string) => {
             // console.log("Venue ID:", venueId);
-            // console.log("Date:", date);
+            console.log("Date:", date);
         
             // Convert date string to Date object if needed, stripping out the time part
             const startOfDay = new Date(date);
@@ -236,7 +312,8 @@ export const venueRepositoryMongodb = ()=>{
             getUsersByIds,
             getRatingsByVenueId,
             getRatings,
-            getVenue
+            getVenue,
+            getVenuesByDate
         }
     
 }

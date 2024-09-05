@@ -43,6 +43,7 @@ const userRoutes =()=>{
     router.post("/forgot-password",controller.forgotPassword)
     router.post("/reset-password/:token",controller.resetPassword)
     router.get("/getvenues",controller.getAllVenues)
+    router.get("/getvenuesbydate",controller.getVenuesDate)
     router.get("/profile",authenticateUser,controller.getUserProfile)
     router.patch("/edit-profile",authenticateUser,controller.editUserProfile)
     router.get("/single-venue/:venueId",controller.getSingleVenue)

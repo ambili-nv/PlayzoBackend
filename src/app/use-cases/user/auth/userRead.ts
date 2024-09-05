@@ -11,6 +11,15 @@ export const getVenue = async (venueDbRepository:ReturnType<venueDbInterface>)=>
     }
 }
 
+export const getVenuesByDateService = async (date: string, venueDbRepository: ReturnType<venueDbInterface>) => {
+    try {
+        const venues = await venueDbRepository.getVenuesByDate(date);
+        return venues;
+    } catch (error) {
+        throw error;
+    }
+};
+
 export const findTimeSlotsByVenueIdAndDate = async (venueDbRepository: ReturnType<venueDbInterface>, venueId: string, date: string) => {
     try {
         const timeSlots = await venueDbRepository.getTimeSlotsByVenueIdAndDate(venueId, date);

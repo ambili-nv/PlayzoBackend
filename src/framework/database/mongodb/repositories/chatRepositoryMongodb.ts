@@ -12,8 +12,10 @@ export const chatRepositoryMongodb = ()=>{
         await conversation.findOne({ members: { $all: [senderId, recieverId] } });
 
     const getAllChats = async(id:string)=>{
+      console.log("chat in db 4");
+      
        const allChat =   await conversation.find({ members: { $in: [id] } });
-      //  console.log(allChat,"allChat db");
+       console.log(allChat,"allChat db");
        return allChat
     }
 
