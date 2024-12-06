@@ -78,21 +78,21 @@ const venueID = bookings.venueId.toString()
     console.log(ownerId,"34");
     
 
-    if (ownerId) {
-        io?.emit("sendBookingNotification", {
-            senderId: userId,
-            receiverId: ownerId,
-            text: `You have a new booking with ID: ${bookingId}`,
-            bookingId
-        });
-        console.log(`Notification sent to ${ownerId}: bookingssssss`, {
-            senderId: userId,
-            text: `You have a new booking with ID: ${bookingId}`,
-            bookingId
-        });
-    } else {
-        console.log(`Venue owner with ID ${ownerId} not found`);
-    }
+    // if (ownerId) {
+    //     io?.emit("sendBookingNotification", {
+    //         senderId: userId,
+    //         receiverId: ownerId,
+    //         text: `You have a new booking with ID: ${bookingId}`,
+    //         bookingId
+    //     });
+    //     console.log(`Notification sent to ${ownerId}: bookingssssss`, {
+    //         senderId: userId,
+    //         text: `You have a new booking with ID: ${bookingId}`,
+    //         bookingId
+    //     });
+    // } else {
+    //     console.log(`Venue owner with ID ${ownerId} not found`);
+    // }
 
     return bookings;
 };
